@@ -30,14 +30,14 @@ exports.run = async(client, msg, args) => {
       var authorID = warningInfo[0]["authorID"]
       var time = warningInfo[0]["time"]
       var reason = warningInfo[0]["reason"]
-   
+        var userID = results.userID
        
             
 
             const embed = new Discord.MessageEmbed()
             .setColor('YELLOW')
-            .setTitle(`Warning Info For Punishment ID: ${punishmentID}`)
-            .setDescription(`**Warn author:** <@${authorID}>\n\n**Time:** \`${time}\`\n\n **Reason for warn:** \`${reason}\`\n\n\n`)
+            .setTitle(`Warning Info For ID: \`${punishmentID}\``)
+            .setDescription(`**Warn author:** <@${authorID}>\n\n**Member warned:** <@${userID}>\n\n**Time:** \`${time}\`\n\n **Reason for warn:** \`${reason}\`\n\n\n`)
             .setThumbnail(member.user.displayAvatarURL({dynamic: true, size: 2048}))
             msg.channel.send(embed)
            
