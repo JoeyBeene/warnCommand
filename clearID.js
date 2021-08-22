@@ -1,7 +1,6 @@
-const mongoose = require('mongoose')
 const mongo = require('../mongo')
 const Discord = require('discord.js')
-const Fs = require('fs')
+
 
 const warnSchema = require('../schema/warnSchema.js')
 
@@ -16,23 +15,25 @@ exports.run = async(client, msg, args) => {
 
     await mongo().then(async (mongoose) => {
         try {
-            try{
+          const results = await warnSchema.findOne({
+             punishmentIDE: [`${punishmentID}`]
+           })
+           if(results == null) {
+            return msg.channel.send(`A warning with that punishment ID was not found in the database! Please double check to see that you have the correct one!`)
+           }
             await warnSchema.deleteMany({
                punishmentIDE: [`${punishmentID}`]
               })
-              msg.channel.send(`Any warnings with the punishment ID: ${punishmentID} have been succesfully cleared!`)
+              msg.channel.send(`The warning with the punishment ID: ${punishmentID} has been succesfully cleared!`)
            
 
 
-            } catch(err) {
-                console.log(err)
-                msg.channel.send(`A warning with that punishment ID was not found in the database! Please double check to see that you have the correct one!`)
-            }
+           
 try{
   var authore = msg.member
  
   
-    const channele = msg.guild.channels.cache.find(c => c.id === `802725920313311262`)
+    const channele = msg.guild.channels.cache.find(c => c.id === `868990396171173918`)
    
     var log = new Discord.MessageEmbed()
     .setColor('YELLOW')
